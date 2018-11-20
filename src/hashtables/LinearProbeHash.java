@@ -24,7 +24,7 @@ public class LinearProbeHash extends HashTable<Integer>{
                 i = 0;
             }
             if(i ==k){
-                throw new IndexOutOfBoundsException("Hastable is out of space");
+                throw new IndexOutOfBoundsException("Hashtable is out of space");
             }
         }
         return value;
