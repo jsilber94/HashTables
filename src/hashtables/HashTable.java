@@ -43,7 +43,7 @@ public abstract class HashTable{
             return me.getValue();
         }
         else{
-            hashTable[hash].setValue(v);
+            hashTable[hash] = new MapElement(k,v);
             return null;
         }
     }
