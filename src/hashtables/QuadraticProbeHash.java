@@ -16,12 +16,10 @@ public class QuadraticProbeHash extends HashTable<Integer> {
         Integer value = super.put(k, v);
         for(int i = (++k); i<super.size() && value!= null;i++){
             int newKey = (int)Math.pow(i,2);
-            if (newKey > super.size()){
-                i = 0;
-            }
-            else{
                 value = super.put(newKey, v);  
-            }
+        }
+        if(value == null){
+            throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
         return value;
     }

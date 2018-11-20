@@ -20,12 +20,9 @@ public class LinearProbeHash extends HashTable<Integer>{
         Integer value = super.put(k, v);
         for(int i = (++k); i<super.size() && value!= null;i++){
             value = super.put(i, v);
-            if(i == super.size()-1){
-                i = 0;
-            }
-            if(i ==k){
-                throw new IndexOutOfBoundsException("Hashtable is out of space");
-            }
+        }
+        if(value == null){
+            throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
         return value;
     }
