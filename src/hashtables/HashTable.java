@@ -35,7 +35,7 @@ public abstract class HashTable{
         return me.getValue();
     }
     
-    public Object put (int k,Object v){
+    public Object put (int k, Object v){
         int hash = k % size();
         MapElement me = hashTable[hash];
         if (me != null){
