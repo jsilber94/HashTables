@@ -1,12 +1,11 @@
 package hashtables;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
  *
  * @author Max Page-Slowik
- * @param <E>
+ * @author Jesse Silber
  */
 public class SeperateChainHash extends HashTable<LinkedList<Integer>> {
 
