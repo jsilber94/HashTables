@@ -6,16 +6,16 @@ import java.util.Objects;
  *
  * @author Jesse Silber
  */
-public class MapElement {
+public class MapElement <V>{
 
     private int key = 0;
-    private Object value;
+    private V value;
 
-    public MapElement(Object value) {
+    public MapElement(V value) {
         this.value = value;
         this.key = (int) (Math.random() * 100);
     }
-    public MapElement(int key, Object value) {
+    public MapElement(int key, V value) {
         this.value = value;
         this.key = key;
     }
@@ -51,11 +51,11 @@ public class MapElement {
         this.key = key;
     }
 
-    public Object getValue() {
+    public V getValue() {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(V value) {
         this.value = value;
     }
 
