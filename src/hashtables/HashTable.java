@@ -51,11 +51,11 @@ public abstract class HashTable{
     public Object remove(int k) {
         int hash = k % size();
         long startTime = System.currentTimeMillis();
-        E data = hashTable[hash].getValue();
-        if(data != null){
+        MapElement me = hashTable[hash];
+        if(me != null){
             hashTable[hash] = null;
             System.out.println(System.currentTimeMillis() - startTime);
-            return data;
+            return me.getValue();
         } else {
             return null;
         }
