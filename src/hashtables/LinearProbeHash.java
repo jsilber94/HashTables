@@ -9,15 +9,15 @@ package hashtables;
  *
  * @author Max Page-Slowik
  */
-public class LinearProbeHash extends HashTable<Integer>{
+public class LinearProbeHash extends HashTable{
     
     public LinearProbeHash(int size) {
         super(size);
     }
     
     @Override
-    public Integer put(int k, Integer v){
-        Integer value = super.put(k, v);
+    public Object put(int k, Object v){
+        Object value = super.put(k, v);
         for(int i = (++k); i<super.size() && value!= null;i++){
             value = super.put(i, v);
         }
