@@ -15,6 +15,10 @@ public class MapElement {
         this.value = value;
         this.key = (int) (Math.random() * 100);
     }
+    public MapElement(int key, Object value) {
+        this.value = value;
+        this.key = key;
+    }
 
     @Override
     public int hashCode() {
