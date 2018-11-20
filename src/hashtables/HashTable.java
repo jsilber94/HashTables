@@ -8,12 +8,13 @@ package hashtables;
 /**
  *
  * @author Max Page-Slowik
+ * @param <E>
  */
-public abstract class HashTable{
-    private Integer[] hashTable;
+public abstract class HashTable <E>{
+    private E[] hashTable;
     
     public HashTable(int size){
-        hashTable = (Integer[]) new Integer[size];
+        hashTable = (E[]) new Object[size];
     }
     
     public int size(){
@@ -33,12 +34,12 @@ public abstract class HashTable{
         return k % size();
     }
     
-    public Integer get(int k){
+    public E get(int k){
         return hashTable[hashcode(k)];
     }
     
-    public Integer put (int k, Integer v){
-        Integer data = hashTable[hashcode(k)];
+    public E put (int k, E v){
+        E data = hashTable[hashcode(k)];
         if (data != null){
             hashTable[hashcode(k)] = v;
             return data;
@@ -48,8 +49,8 @@ public abstract class HashTable{
             return null;
         }
     }
-    public Integer remove(int k){
-        Integer data = hashTable[hashcode(k)];
+    public E remove(int k){
+        E data = hashTable[hashcode(k)];
         if(data != null){
             hashTable[hashcode(k)] = null;
             return data;
