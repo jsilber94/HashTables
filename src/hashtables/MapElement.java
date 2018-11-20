@@ -6,12 +6,12 @@ import java.util.Objects;
  *
  * @author Jesse Silber
  */
-public class MapElement<E> {
+public class MapElement {
 
     private int key = 0;
-    private E value;
+    private Object value;
 
-    public MapElement(E value) {
+    public MapElement(Object value) {
         this.value = value;
         this.key = (int) (Math.random() * 100);
     }
@@ -47,11 +47,11 @@ public class MapElement<E> {
         this.key = key;
     }
 
-    public E getValue() {
+    public Object getValue() {
         return value;
     }
 
-    public void setValue(E value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 
