@@ -8,8 +8,8 @@ import java.util.Objects;
  */
 public class MapElement<E> {
 
-    int key = 0;
-    E value;
+    private int key = 0;
+    private E value;
 
     public MapElement(E value) {
         this.value = value;

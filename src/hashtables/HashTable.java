@@ -6,8 +6,8 @@ package hashtables;
  * @author Jesse Silber
  * @param <E>
  */
-public abstract class HashTable<E>{
-    private MapElement<E>[] hashTable;
+public abstract class HashTable{
+    private MapElement[] hashTable;
     
     public HashTable(int size){
         hashTable = new MapElement[size];
@@ -26,34 +26,34 @@ public abstract class HashTable<E>{
         return true;
     }
 
-    public int hashcode(int k) {
-        return k % size();
-    }
 
-    public E get(int k) {
+    public Object get(int k) {
+        int hash = k % size();
         long startTime = System.currentTimeMillis();
-        E e = hashTable[hashcode(k)].getValue();
+        MapElement me = hashTable[hash];
         System.out.println(System.currentTimeMillis() - startTime);
-        return e;
+        return me.getValue();
     }
     
-    public E put (int k, E v){
-        E data = hashTable[hashcode(k)].getValue();
-        if (data != null){
-            hashTable[hashcode(k)].setValue(v);
-            return data;
+    public Object put (int k, E v){
+        int hash = k % size();
+        MapElement me = hashTable[hash];
+        if (me != null){
+            hashTable[hash] = new MapElement(k,v);
+            return me.getValue();
         }
         else{
-            hashTable[hashcode(k)].setValue(v);
+            hashTable[hash].setValue(v);
             return null;
         }
     }
 
-    public E remove(int k) {
+    public Object remove(int k) {
+        int hash = k % size();
         long startTime = System.currentTimeMillis();
-        E data = hashTable[hashcode(k)].getValue();
+        E data = hashTable[hash].getValue();
         if(data != null){
-            hashTable[hashcode(k)] = null;
+            hashTable[hash] = null;
             System.out.println(System.currentTimeMillis() - startTime);
             return data;
         } else {
