@@ -4,26 +4,21 @@ import java.util.Objects;
 
 /**
  *
- * @author Jesse
+ * @author Jesse Silber
  */
-public class MapElement {
+public class MapElement<E> {
 
     int key = 0;
-    String value = "";
+    E value;
 
-    public MapElement(String value) {
+    public MapElement(E value) {
         this.value = value;
-        key = (int) Math.random();
+        this.key = (int) (Math.random() * 100);
     }
 
     @Override
     public int hashCode() {
-        int sLength = value.length();
-        int hash = 0;
-        for (int i = 0; i < sLength; i++) {
-            hash = 11 * hash + value.charAt(i);
-        }
-        return hash;
+        return  key % 11; 
     }
 
     @Override
@@ -52,11 +47,11 @@ public class MapElement {
         this.key = key;
     }
 
-    public String getValue() {
+    public E getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(E value) {
         this.value = value;
     }
 
