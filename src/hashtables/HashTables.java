@@ -15,7 +15,7 @@ public class HashTables {
         MapElement[] mp = createElements(50);
         HashTable lph = new LinearProbeHash(capacity);
         lph = populateHashTable(lph, mp);
-
+ 
 //        runGet(lph);
 //        runRemove(lph);
 //        runGet(lph);
