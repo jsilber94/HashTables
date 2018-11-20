@@ -9,7 +9,7 @@ package hashtables;
  *
  * @author Max Page-Slowik
  */
-public class LinearProbeHash extends HashTable{
+public class LinearProbeHash extends HashTable<Integer>{
     
     public LinearProbeHash(int size) {
         super(size);
@@ -24,7 +24,7 @@ public class LinearProbeHash extends HashTable{
                 i = 0;
             }
             if(i ==k){
-                new IndexOutOfBoundsException("");
+                throw new IndexOutOfBoundsException("Hastable is out of space");
             }
         }
         return value;
