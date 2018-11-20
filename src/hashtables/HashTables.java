@@ -12,13 +12,13 @@ public class HashTables {
     public static void main(String[] args) {
 
         int capacity = 100;
-        MapElement[] mp = createElements(50);
+        int amountOfElements = 50;
+        MapElement[] mp = createElements(amountOfElements);
         HashTable lph = new LinearProbeHash(capacity);
         lph = populateHashTable(lph, mp);
- 
-//        runGet(lph);
-//        runRemove(lph);
-//        runGet(lph);
+
+//        runGet(lph, mp);
+//      runRemove(lph, mp);
     }
 
     public static MapElement[] createElements(int capacity) {
@@ -36,15 +36,15 @@ public class HashTables {
         return ht;
     }
 
-    public static void runGet(HashTable ht) {
+    public static void runGet(HashTable ht, MapElement[] mp) {
         for (int i = 0; i < 50; i++) {
-
+            ht.get(mp[i].getKey());
         }
     }
 
-    public static void runRemove(HashTable ht) {
+    public static void runRemove(HashTable ht, MapElement[] mp) {
         for (int i = 0; i < 25; i++) {
-
+            ht.remove(mp[i].getKey());
         }
     }
 
