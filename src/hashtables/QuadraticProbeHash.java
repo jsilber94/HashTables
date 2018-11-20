@@ -19,7 +19,7 @@ public class QuadraticProbeHash extends HashTable {
             int newKey = (int)Math.pow(i,2);
                 value = super.put(newKey, v);  
         }
-        if(value == null){
+        if(value != null){
             throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
         return value;
