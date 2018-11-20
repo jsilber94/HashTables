@@ -17,6 +17,16 @@ public class SeperateChainHash extends HashTable<LinkedList<Integer>> {
     }
 
     @Override
+    public LinkedList<Integer> remove(int k) {
+        return super.remove(k); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public LinkedList<Integer> get(int k) {
+        return super.get(k); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
     public LinkedList<Integer> put(int k, LinkedList<Integer> v) {
         long startTime = System.currentTimeMillis();
         LinkedList<Integer> ll = super.put(k, v); //ll is old list

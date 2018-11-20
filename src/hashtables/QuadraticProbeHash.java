@@ -5,7 +5,7 @@ package hashtables;
  * @author Max Page-Slowik
  * @author Jesse Silber
  */
-public class QuadraticProbeHash extends HashTable<Integer> {
+public class QuadraticProbeHash extends HashTable {
 
     public QuadraticProbeHash(int size) {
         super(size);
