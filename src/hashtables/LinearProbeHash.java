@@ -18,6 +18,7 @@ public class LinearProbeHash extends HashTable{
     @Override
     public Object put(int k, Object v){
         Object value = super.put(k, v);
+        
         for(int i = (++k); i<super.size() && value!= null;i++){
             value = super.put(i, v);
         }
