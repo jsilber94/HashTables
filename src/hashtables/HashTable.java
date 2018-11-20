@@ -10,11 +10,11 @@ package hashtables;
  * @author Max Page-Slowik
  * @param <E>
  */
-public abstract class HashTable <E>{
-    private E[] hashTable;
+public abstract class HashTable<E>{
+    private MapElement<E>[] hashTable;
     
     public HashTable(int size){
-        hashTable = (E[]) new Object[size];
+        hashTable = new MapElement[size];
     }
     
     public int size(){
@@ -35,22 +35,23 @@ public abstract class HashTable <E>{
     }
     
     public E get(int k){
-        return hashTable[hashcode(k)];
+        return hashTable[hashcode(k)].getValue();
     }
     
     public E put (int k, E v){
-        E data = hashTable[hashcode(k)];
+        
+        E data = hashTable[hashcode(k)].getValue();
         if (data != null){
-            hashTable[hashcode(k)] = v;
+            hashTable[hashcode(k)].setValue(v);
             return data;
         }
         else{
-            hashTable[hashcode(k)] = v;
+            hashTable[hashcode(k)].setValue(v);
             return null;
         }
     }
     public E remove(int k){
-        E data = hashTable[hashcode(k)];
+        E data = hashTable[hashcode(k)].getValue();
         if(data != null){
             hashTable[hashcode(k)] = null;
             return data;
