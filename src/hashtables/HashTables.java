@@ -13,9 +13,18 @@ public class HashTables {
 
         int capacity = 100;
         int amountOfElements = 50;
+
         MapElement[] mp = createElements(amountOfElements);
         HashTable lph = new LinearProbeHash(capacity);
         lph = populateHashTable(lph, mp);
+
+        MapElement[] mp2 = createElements(amountOfElements);
+        HashTable qph = new QuadraticProbeHash(capacity);
+        qph = populateHashTable(qph, mp);
+
+        MapElement[] mp3 = createElements(amountOfElements);
+        HashTable sch = new SeperateChainHash(capacity);
+        sch = populateHashTable(sch, mp);
 
 //        runGet(lph, mp);
 //      runRemove(lph, mp);

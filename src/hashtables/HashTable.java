@@ -6,10 +6,11 @@ package hashtables;
  * @author Jesse Silber
  * @param <E>
  */
-public abstract class HashTable{
+public abstract class HashTable {
+
     private MapElement[] hashTable;
-    
-    public HashTable(int size){
+
+    public HashTable(int size) {
         hashTable = new MapElement[size];
     }
 
@@ -26,24 +27,28 @@ public abstract class HashTable{
         return true;
     }
 
-
     public Object get(int k) {
         int hash = k % size();
         long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
+        if(me.getKey()!= k)
+            return null;
         System.out.println(System.currentTimeMillis() - startTime);
         return me.getValue();
     }
-    
-    public Object put (int k, Object v){
+
+    public Object put(int k, Object v) {
+        MapElement m = new MapElement(k, v);
+//        int hash = m.hashCode();
         int hash = k % size();
         MapElement me = hashTable[hash];
-        if (me != null){
-            hashTable[hash] = new MapElement(k,v);
+        if (me != null) {
+//            MapElement me2 = new MapElement(k,v);
+//            hash = me2.hashCode();
+            hashTable[hash] = new MapElement(k, v);
             return me.getValue();
-        }
-        else{
-            hashTable[hash] = new MapElement(k,v);
+        } else {
+            hashTable[hash] = new MapElement(k, v);
             return null;
         }
     }
@@ -52,12 +57,16 @@ public abstract class HashTable{
         int hash = k % size();
         long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
-        if(me != null){
+        if (me != null) {
             hashTable[hash] = null;
             System.out.println(System.currentTimeMillis() - startTime);
             return me.getValue();
         } else {
             return null;
         }
+    }
+
+    public int hashCode(int k) {
+        return k % size();
     }
 }
