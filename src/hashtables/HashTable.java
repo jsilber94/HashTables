@@ -4,11 +4,10 @@ package hashtables;
  *
  * @author Max Page-Slowik
  * @author Jesse Silber
- * @param <E>
  */
 public abstract class HashTable {
 
-    private MapElement[] hashTable;
+    private final MapElement[] hashTable;
 
     public HashTable(int size) {
         hashTable = new MapElement[size];
@@ -28,23 +27,20 @@ public abstract class HashTable {
     }
 
     public Object get(int k) {
-        int hash = k % size();
+        int hash = this.hashCode(k);
         long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
-        if(me.getKey()!= k)
+        if (me.getKey() != k) {
             return null;
+        }
         System.out.println(System.currentTimeMillis() - startTime);
         return me.getValue();
     }
 
     public Object put(int k, Object v) {
-        MapElement m = new MapElement(k, v);
-//        int hash = m.hashCode();
-        int hash = k % size();
+        int hash = this.hashCode(k);
         MapElement me = hashTable[hash];
         if (me != null) {
-//            MapElement me2 = new MapElement(k,v);
-//            hash = me2.hashCode();
             hashTable[hash] = new MapElement(k, v);
             return me.getValue();
         } else {
@@ -54,7 +50,7 @@ public abstract class HashTable {
     }
 
     public Object remove(int k) {
-        int hash = k % size();
+        int hash = this.hashCode(k);
         long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
         if (me != null) {
