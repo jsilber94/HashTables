@@ -7,6 +7,10 @@ package hashtables;
  */
 public class QuadraticProbeHash extends HashTable {
 
+    int collision = 0;
+    int count = 0;
+    Object[] o = new Object[50];
+
     public QuadraticProbeHash(int size) {
         super(size);
     }
@@ -14,14 +18,23 @@ public class QuadraticProbeHash extends HashTable {
     @Override
     public Object put(int k, Object v) {
         Object value = super.put(k, v);
-
+        if (value != null) {
+            collision++;
+        }
         for (int i = (++k); i < super.size() && value != null; i++) {
-            int newKey = (int) Math.pow(i, 2);
-            value = super.put(newKey, v);
+            int newKey = (int) Math.pow(i, 2); //
+            value = super.put(newKey, v); //if value is null, loop breaks
         }
         if (value != null) {
             throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
+        System.out.println("k= " + k);
+        System.out.println("v= " + v);
+        System.out.println("hash= " + super.hashCode(k));
+        System.out.println("~~~~");
+        o[count] = k;
+        count ++;
+        
         return value;
     }
 
@@ -38,14 +51,17 @@ public class QuadraticProbeHash extends HashTable {
 
     @Override
     public Object get(int k) {
-        Object o = super.get(k);//k is the original key, o may or may not be the right value
-        if(o == null){
-            //do quad stuff
+        Object value = super.get(k);//k is the original key, value is either null or right value
+        if (value == null) { //means either no value in spot or wrong value in spot
+            for (int i = (++k); i < super.size() && value == null; i++) { //quad probe
+                int newKey = (int) Math.pow(i, 2);
+                value = super.get(newKey);
+            }
         }
-        MapElement mp = new MapElement(k, o);
-        int hash = mp.hashCode();
-
-        return null;
+        if(value == null){
+            System.out.println("Value could not be found: " + k);
+        }
+        return value;
     }
 
 }

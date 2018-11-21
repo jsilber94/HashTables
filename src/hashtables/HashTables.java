@@ -14,19 +14,17 @@ public class HashTables {
         int capacity = 100;
         int amountOfElements = 50;
 
-        MapElement[] mp = createElements(amountOfElements);
-        HashTable lph = new LinearProbeHash(capacity);
-        lph = populateHashTable(lph, mp);
-
+//        MapElement[] mp = createElements(amountOfElements);
+//        HashTable lph = new LinearProbeHash(capacity);
+//        lph = populateHashTable(lph, mp);
+//        MapElement[] mp3 = createElements(amountOfElements);
+//        HashTable sch = new SeperateChainHash(capacity);
+//        sch = populateHashTable(sch, mp3);
         MapElement[] mp2 = createElements(amountOfElements);
         HashTable qph = new QuadraticProbeHash(capacity);
-        qph = populateHashTable(qph, mp);
-
-        MapElement[] mp3 = createElements(amountOfElements);
-        HashTable sch = new SeperateChainHash(capacity);
-        sch = populateHashTable(sch, mp);
-
-//        runGet(lph, mp);
+        qph = populateHashTable(qph, mp2);
+        
+//        runGet(qph, mp2);
 //      runRemove(lph, mp);
     }
 
@@ -34,21 +32,27 @@ public class HashTables {
         MapElement[] mapElements = new MapElement[capacity];
         for (int i = 0; i < capacity; i++) {
             mapElements[i] = new MapElement("Value");
+            mapElements[i].setValue("Value"+mapElements[i].getKey());
         }
         return mapElements;
     }
 
     public static HashTable populateHashTable(HashTable ht, MapElement[] mp) {
-        for (int i = 0; i < mp.length; i++) {
-            ht.put(mp[i].getKey(), mp[i].getValue());
+        for (MapElement mp1 : mp) {
+            ht.put(mp1.getKey(), mp1.getValue());
         }
         return ht;
     }
 
     public static void runGet(HashTable ht, MapElement[] mp) {
+        int count = 0;
         for (int i = 0; i < 50; i++) {
-            ht.get(mp[i].getKey());
+            Object o = ht.get(mp[i].getKey());
+            if (o != null) {
+                count++;
+            }
         }
+        System.out.println(count);
     }
 
     public static void runRemove(HashTable ht, MapElement[] mp) {

@@ -30,10 +30,13 @@ public abstract class HashTable {
         int hash = this.hashCode(k);
         long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
-        if (me.getKey() != k) {
+
+        if (me == null) {
+            return null;
+        } else if (me.getKey() != k) {
             return null;
         }
-        System.out.println(System.currentTimeMillis() - startTime);
+//        System.out.println(System.currentTimeMillis() - startTime);
         return me.getValue();
     }
 
