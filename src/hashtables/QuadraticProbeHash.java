@@ -9,7 +9,6 @@ public class QuadraticProbeHash extends HashTable {
 
     int collision = 0;
     int count = 0;
-    Object[] o = new Object[50];
 
     public QuadraticProbeHash(int size) {
         super(size);
@@ -28,11 +27,7 @@ public class QuadraticProbeHash extends HashTable {
         if (value != null) {
             throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
-        System.out.println("k= " + k);
-        System.out.println("v= " + v);
-        System.out.println("hash= " + super.hashCode(k));
-        System.out.println("~~~~");
-        o[count] = k;
+        
         count ++;
         
         return value;

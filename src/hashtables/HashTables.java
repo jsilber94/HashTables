@@ -23,16 +23,15 @@ public class HashTables {
         MapElement[] mp2 = createElements(amountOfElements);
         HashTable qph = new QuadraticProbeHash(capacity);
         qph = populateHashTable(qph, mp2);
-        
-//        runGet(qph, mp2);
+
+        runGet(qph, mp2);
 //      runRemove(lph, mp);
     }
 
     public static MapElement[] createElements(int capacity) {
         MapElement[] mapElements = new MapElement[capacity];
         for (int i = 0; i < capacity; i++) {
-            mapElements[i] = new MapElement("Value");
-            mapElements[i].setValue("Value"+mapElements[i].getKey());
+            mapElements[i] = new MapElement("Value" + i);
         }
         return mapElements;
     }
@@ -47,12 +46,12 @@ public class HashTables {
     public static void runGet(HashTable ht, MapElement[] mp) {
         int count = 0;
         for (int i = 0; i < 50; i++) {
-            Object o = ht.get(mp[i].getKey());
+            Object o = ht.get((mp[i].getKey()));
             if (o != null) {
                 count++;
             }
         }
-        System.out.println(count);
+        System.out.println("count: " + count);
     }
 
     public static void runRemove(HashTable ht, MapElement[] mp) {
