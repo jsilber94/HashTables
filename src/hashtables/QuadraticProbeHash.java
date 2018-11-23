@@ -14,22 +14,33 @@ public class QuadraticProbeHash extends HashTable {
         super(size);
     }
 
+    private int hashcode(int k) {
+        return (int) Math.pow(k, 2) % size();
+    }
+
     @Override
     public Object put(int k, Object v) {
         Object value = super.put(k, v);
         if (value != null) {
-            collision++;
+            for (int i = 1; i < super.size() && value != null; i++) {
+                collision++;
+                int hash = hashCode(k+i);
+                MapElement me = hashTable[hash];
+                if (me != null) {
+                    hashTable[hash] = new MapElement(k, v);
+                    value = me.getValue();
+                } else {
+                    hashTable[hash] = new MapElement(k, v);
+                    value = null;
+                }
+            }
+
         }
-        for (int i = (++k); i < super.size() && value != null; i++) {
-            int newKey = (int) Math.pow(i, 2); //
-            value = super.put(newKey, v); //if value is null, loop breaks
-        }
+
         if (value != null) {
             throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
-        
-        count ++;
-        
+        count++;
         return value;
     }
 
@@ -48,13 +59,20 @@ public class QuadraticProbeHash extends HashTable {
     public Object get(int k) {
         Object value = super.get(k);//k is the original key, value is either null or right value
         if (value == null) { //means either no value in spot or wrong value in spot
-            for (int i = (++k); i < super.size() && value == null; i++) { //quad probe
-                int newKey = (int) Math.pow(i, 2);
-                value = super.get(newKey);
+            for (int i = 1; i < super.size() && value != null; i++) {
+                collision++;
+                int hash = hashCode(k+i);
+                MapElement me = hashTable[hash];
+                if (me == null) {
+                    return null;
+                } else if (me.getKey() != k) {
+                    return null;
+                }
             }
         }
-        if(value == null){
-            System.out.println("Value could not be found: " + k);
+        if (value == null) {
+            System.out.println("Value could not be found: " + k + ", " + value);
+
         }
         return value;
     }

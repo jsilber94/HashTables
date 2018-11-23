@@ -17,6 +17,9 @@ public class LinearProbeHash extends HashTable{
         super(size);
     }
     
+    private int hashcode(int k){
+        return k+1;
+    }
     @Override
     public Object put(int k, Object v){
         Object value = super.put(k, v);
@@ -25,8 +28,8 @@ public class LinearProbeHash extends HashTable{
         }
         elements++;
         int attempts = 0; 
-        for(int i = (++k); i<super.size() && value!= null;i++){
-            value = super.put(i, v);
+        for(int i = 1; i<super.size() && value!= null;i++){
+            value = super.put(k+i, v);
             attempts++;    
         }
         if(value != null){
@@ -64,7 +67,6 @@ public class LinearProbeHash extends HashTable{
         if(value ==null){
            collisions++;         
         }
-        elements--;
         int attempts = 0; 
         for(int i = (++k); i<super.size() && value!= null;i++){
             value = super.get(k);
@@ -72,7 +74,7 @@ public class LinearProbeHash extends HashTable{
         }
         System.out.println("Size: "+super.size());
         System.out.println("Elements: "+elements);
-        System.out.println("Collisions: "+(collisions+=attempts));
+        System.out.println("Collisions: "+(collisions));
         System.out.println("Attempts: "+attempts);
         return value; 
     }

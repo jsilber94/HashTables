@@ -14,16 +14,16 @@ public class HashTables {
         int capacity = 100;
         int amountOfElements = 50;
 
-        MapElement[] mp = createElements(amountOfElements);
-       HashTable lph = new LinearProbeHash(capacity);
-       lph = populateHashTable(lph, mp);
+//        MapElement[] mp = createElements(amountOfElements);
+//       HashTable lph = new LinearProbeHash(capacity);
+//       lph = populateHashTable(lph, mp);
 //        MapElement[] mp3 = createElements(amountOfElements);
 //        HashTable sch = new SeperateChainHash(capacity);
 //        sch = populateHashTable(sch, mp3);
         MapElement[] mp2 = createElements(amountOfElements);
         HashTable qph = new QuadraticProbeHash(capacity);
         qph = populateHashTable(qph, mp2);
-        runGet(lph,mp);
+  //      runGet(lph,mp);
         runGet(qph, mp2);
 //      runRemove(lph, mp);
     }
@@ -52,6 +52,7 @@ public class HashTables {
             }
         }
         System.out.println("count: " + count);
+        System.out.println(ht.toString());
     }
 
     public static void runRemove(HashTable ht, MapElement[] mp) {
