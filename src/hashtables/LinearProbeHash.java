@@ -20,7 +20,9 @@ public class LinearProbeHash extends HashTable{
     @Override
     public Object put(int k, Object v){
         Object value = super.put(k, v);
-        collisions++;
+        if(value !=null){
+           collisions++;         
+        }
         elements++;
         int attempts = 0; 
         for(int i = (++k); i<super.size() && value!= null;i++){
@@ -32,19 +34,47 @@ public class LinearProbeHash extends HashTable{
         }
         System.out.println("Size: "+super.size());
         System.out.println("Elements: "+elements);
-        System.out.println("Collisions: "+collisions);
+        System.out.println("Collisions: "+(collisions));
         System.out.println("Attempts: "+attempts);
         return value;
     }
 
     @Override
     public Object remove(int k) {
-        return super.remove(k);
+        Object value = super.remove(k);
+        if(value ==null){
+           collisions++;         
+        }
+        elements--;
+        int attempts = 0; 
+        for(int i = (++k); i<super.size() && value!= null;i++){
+            value = super.remove(k);
+            attempts++;    
+        }
+        System.out.println("Size: "+super.size());
+        System.out.println("Elements: "+elements);
+        System.out.println("Collisions: "+(collisions));
+        System.out.println("Attempts: "+attempts);
+        return value;    
     }
 
     @Override
     public Object get(int k) {
-        return super.get(k); //To change body of generated methods, choose Tools | Templates.
+        Object value = super.get(k);
+        if(value ==null){
+           collisions++;         
+        }
+        elements--;
+        int attempts = 0; 
+        for(int i = (++k); i<super.size() && value!= null;i++){
+            value = super.get(k);
+            attempts++;   
+        }
+        System.out.println("Size: "+super.size());
+        System.out.println("Elements: "+elements);
+        System.out.println("Collisions: "+(collisions+=attempts));
+        System.out.println("Attempts: "+attempts);
+        return value; 
     }
     
     

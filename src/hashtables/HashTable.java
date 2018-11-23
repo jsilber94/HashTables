@@ -28,7 +28,7 @@ public abstract class HashTable {
 
     public Object get(int k) {
         int hash = this.hashCode(k);
-        long startTime = System.currentTimeMillis();
+        //long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
 
         if (me == null) {
@@ -56,12 +56,15 @@ public abstract class HashTable {
         int hash = this.hashCode(k);
         long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
-        if (me != null) {
+        if (me == null) {
+            return null;
+        } else if (me.getKey() != k) {
+            return null;
+        }
+        else {
             hashTable[hash] = null;
             System.out.println(System.currentTimeMillis() - startTime);
             return me.getValue();
-        } else {
-            return null;
         }
     }
 
