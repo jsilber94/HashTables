@@ -15,7 +15,7 @@ public class QuadraticProbeHash extends HashTable {
     }
 
     private int hashcode(int k) {
-        return (int) Math.pow(k, 2) % size();
+        return (int) (Math.pow(k, 2)) % size();
     }
 
     @Override
@@ -26,17 +26,13 @@ public class QuadraticProbeHash extends HashTable {
                 collision++;
                 int hash = hashCode(k+i);
                 MapElement me = hashTable[hash];
-                if (me != null) {
-                    hashTable[hash] = new MapElement(k, v);
-                    value = me.getValue();
-                } else {
+                if (me == null) {
                     hashTable[hash] = new MapElement(k, v);
                     value = null;
                 }
             }
 
         }
-
         if (value != null) {
             throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
@@ -63,10 +59,14 @@ public class QuadraticProbeHash extends HashTable {
                 collision++;
                 int hash = hashCode(k+i);
                 MapElement me = hashTable[hash];
-                if (me == null) {
-                    return null;
-                } else if (me.getKey() != k) {
-                    return null;
+                if(me == null){
+                    value = null;
+                }
+                else if (me.getKey() != k) {
+                    value = null;
+                }
+                else{
+                   value = me.getValue();
                 }
             }
         }

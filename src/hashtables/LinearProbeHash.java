@@ -17,20 +17,24 @@ public class LinearProbeHash extends HashTable{
         super(size);
     }
     
-    private int hashcode(int k){
-        return k+1;
-    }
+
     @Override
     public Object put(int k, Object v){
         Object value = super.put(k, v);
-        if(value !=null){
-           collisions++;         
-        }
         elements++;
         int attempts = 0; 
-        for(int i = 1; i<super.size() && value!= null;i++){
-            value = super.put(k+i, v);
-            attempts++;    
+         if (value != null) {
+            for (int i = 1; i < super.size() && value != null; i++) {
+                collisions++;
+                attempts++;
+                int hash = (k+i)%size();
+                MapElement me = hashTable[hash];
+                if (me == null) {
+                    hashTable[hash] = new MapElement(k, v);
+                    value = null;
+                }
+            }
+
         }
         if(value != null){
             throw new IndexOutOfBoundsException("No more room in the hashtable");
@@ -64,13 +68,23 @@ public class LinearProbeHash extends HashTable{
     @Override
     public Object get(int k) {
         Object value = super.get(k);
-        if(value ==null){
-           collisions++;         
-        }
         int attempts = 0; 
-        for(int i = (++k); i<super.size() && value!= null;i++){
-            value = super.get(k);
-            attempts++;   
+        if (value == null) { //means either no value in spot or wrong value in spot
+            for (int i = 1; i < super.size() && value != null; i++) {
+                //collisions++;
+                attempts++;
+                int hash = (k+i)%size();
+                MapElement me = hashTable[hash];
+                if(me == null){
+                    value = null;
+                }
+                else if (me.getKey() != k) {
+                    value = null;
+                }
+                else{
+                   value = me.getValue();
+                }
+            }
         }
         System.out.println("Size: "+super.size());
         System.out.println("Elements: "+elements);
