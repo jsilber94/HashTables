@@ -14,18 +14,20 @@ public class HashTables {
         int capacity = 100;
         int amountOfElements = 50;
 
-//        MapElement[] mp = createElements(amountOfElements);
+//       MapElement[] mp = createElements(amountOfElements);
 //       HashTable lph = new LinearProbeHash(capacity);
 //       lph = populateHashTable(lph, mp);
-//        MapElement[] mp3 = createElements(amountOfElements);
-//        HashTable sch = new SeperateChainHash(capacity);
-//        sch = populateHashTable(sch, mp3);
-        MapElement[] mp2 = createElements(amountOfElements);
-        HashTable qph = new QuadraticProbeHash(capacity);
-        qph = populateHashTable(qph, mp2);
-  //      runGet(lph,mp);
-        runGet(qph, mp2);
-//      runRemove(lph, mp);
+        MapElement[] mp3 = createElements(amountOfElements);
+        HashTable sch = new SeperateChainHash(capacity);
+        sch = populateHashTable(sch, mp3);
+        runGet(sch, mp3);
+        runRemove(sch, mp3);
+
+//        MapElement[] mp2 = createElements(amountOfElements);
+//        HashTable qph = new QuadraticProbeHash(capacity);
+//        qph = populateHashTable(qph, mp2);
+//        runGet(qph, mp2);
+//        runRemove(qph, mp2);
     }
 
     public static MapElement[] createElements(int capacity) {
@@ -37,9 +39,14 @@ public class HashTables {
     }
 
     public static HashTable populateHashTable(HashTable ht, MapElement[] mp) {
+        int count = 0;
         for (MapElement mp1 : mp) {
-            ht.put(mp1.getKey(), mp1.getValue());
+            Object o = ht.put(mp1.getKey(), mp1.getValue());
+            if (o == null) {
+                count++;
+            }
         }
+        System.out.println("count: " + count);
         return ht;
     }
 
@@ -56,9 +63,14 @@ public class HashTables {
     }
 
     public static void runRemove(HashTable ht, MapElement[] mp) {
+        int count = 0;
         for (int i = 0; i < 25; i++) {
-            ht.remove(mp[i].getKey());
+            Object o = ht.remove(mp[i].getKey());
+            if (o != null) {
+                count++;
+            }
         }
+        System.out.println("count: " + count);
     }
 
 }

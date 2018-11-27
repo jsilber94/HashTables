@@ -30,6 +30,7 @@ public abstract class HashTable {
         int hash = this.hashCode(k);
         //long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
+
         if (me == null) {
             return null;
         } else if (me.getKey() != k) {
@@ -55,33 +56,31 @@ public abstract class HashTable {
         int hash = this.hashCode(k);
         long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
-        if (me == null) {
+        if (me == null || me.getKey() != k) {
             return null;
-        } else if (me.getKey() != k) {
-            return null;
-        }
-        else {
+        } else {
             hashTable[hash] = null;
             System.out.println(System.currentTimeMillis() - startTime);
             return me.getValue();
         }
     }
 
-    private int hashCode(int k) {
+    protected int hashCode(int k) {
         return k % size();
     }
-    
+
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-                for(MapElement me: hashTable){
-                    if (me!=null)
-                    sb.append(me.getKey()).append(",").append(me.getValue()).append("|");
-                    else
-                        sb.append("").append(",").append("").append("|");
-                }
-          sb.replace(sb.length()-1,sb.lastIndexOf("|"),"]");
+        for (MapElement me : hashTable) {
+            if (me != null) {
+                sb.append(me.getKey()).append(",").append(me.getValue()).append("|");
+            } else {
+                sb.append("").append(",").append("").append("|");
+            }
+        }
+        sb.replace(sb.length() - 1, sb.lastIndexOf("|"), "]");
         return sb.toString();
     }
 }

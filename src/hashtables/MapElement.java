@@ -5,11 +5,13 @@ import java.util.Objects;
 /**
  *
  * @author Jesse Silber
+ * @param <V>
  */
 public class MapElement <V>{
 
     private int key = 0;
     private V value;
+    private MapElement next;
 
     public MapElement(V value) {
         this.value = value;
@@ -57,6 +59,14 @@ public class MapElement <V>{
 
     public void setValue(V value) {
         this.value = value;
+    }
+
+    public MapElement getNext() {
+        return next;
+    }
+
+    public void setNext(MapElement next) {
+        this.next = next;
     }
 
 }
