@@ -14,33 +14,20 @@ public class HashTables {
         int capacity = 100;
         int amountOfElements = 50;
 
-//       MapElement[] mp = createElements(amountOfElements);
-//       HashTable lph = new LinearProbeHash(capacity);
-//       lph = populateHashTable(lph, mp);
-        MapElement[] mp3 = createElements(amountOfElements);
-        HashTable sch = new SeperateChainHash(capacity);
-        sch = populateHashTable(sch, mp3);
-        runGet(sch, mp3);
-        runRemove(sch, mp3);
+//        MapElement[] mp = createElements(amountOfElements);
+//        HashTable lph = new LinearProbeHash(capacity);
+//        lph = populateHashTable(lph, mp);
 
 //        MapElement[] mp2 = createElements(amountOfElements);
 //        HashTable qph = new QuadraticProbeHash(capacity);
 //        qph = populateHashTable(qph, mp2);
-//        runGet(qph, mp2);
-//        runRemove(qph, mp2);
-        MapElement[] mp = createElements(amountOfElements);
-        HashTable lph = new LinearProbeHash(capacity);
-        lph = populateHashTable(lph, mp);
-//        MapElement[] mp3 = createElements(amountOfElements);
-//        HashTable sch = new SeperateChainHash(capacity);
-//        sch = populateHashTable(sch, mp3);
-        MapElement[] mp2 = createElements(amountOfElements);
-        HashTable qph = new QuadraticProbeHash(capacity);
-        qph = populateHashTable(qph, mp2);
-        runGet(lph, mp);
-        runGet(qph, mp2);
-//      runRemove(lph, mp);
+       
+        MapElement[] mp3 = createElements(amountOfElements);
+        HashTable sch = new SeperateChainHash(capacity);
+        sch = populateHashTable(sch, mp3);
 
+        runGet(sch, mp3);
+        runRemove(sch, mp3);
     }
 
     public static MapElement[] createElements(int capacity) {
