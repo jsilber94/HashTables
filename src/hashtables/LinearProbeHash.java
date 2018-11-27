@@ -44,7 +44,6 @@ public class LinearProbeHash extends HashTable {
         }
         System.out.println("------PUT------");     
         System.out.println("Size: " + super.size());
-        System.out.println("Key: "+k+", Value: "+v);
         System.out.println("Elements: " + elements);
         System.out.println("Collisions: " + (collisions));
         System.out.println("Attempts: " + attempts);
