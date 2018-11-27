@@ -39,6 +39,7 @@ public class LinearProbeHash extends HashTable {
         if (value != null) {
             throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
+        System.out.println("------PUT------");
         System.out.println("Size: " + super.size());
         System.out.println("Elements: " + elements);
         System.out.println("Collisions: " + (collisions));
@@ -67,6 +68,7 @@ public class LinearProbeHash extends HashTable {
                 attempts++;
             }
         }
+        System.out.println("------REMOVE------");
         System.out.println("Size: " + super.size());
         System.out.println("Elements: " + elements);
         System.out.println("Collisions: " + (collisions));
@@ -93,6 +95,7 @@ public class LinearProbeHash extends HashTable {
                 }
             }
         }
+        System.out.println("------GET------");
         System.out.println("Size: " + super.size());
         System.out.println("Elements: " + elements);
         System.out.println("Collisions: " + (collisions));
