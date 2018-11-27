@@ -9,90 +9,101 @@ package hashtables;
  *
  * @author Max Page-Slowik
  */
-public class LinearProbeHash extends HashTable{
+public class LinearProbeHash extends HashTable {
+
     private int collisions = 0;
     private int elements = 0;
-    
+
     public LinearProbeHash(int size) {
         super(size);
     }
-    
 
     @Override
-    public Object put(int k, Object v){
+    public Object put(int k, Object v) {
+        long startTime = System.currentTimeMillis();
         Object value = super.put(k, v);
+        long endTime = System.currentTimeMillis();
         elements++;
-        int attempts = 0; 
-         if (value != null) {
+        int attempts = 0;
+        if (value != null) {
+            startTime = System.currentTimeMillis();
+            collisions++;
             for (int i = 1; i < super.size() && value != null; i++) {
-                collisions++;
                 attempts++;
-                int hash = (k+i)%size();
+                int hash = (k + i) % size();
                 MapElement me = hashTable[hash];
                 if (me == null) {
                     hashTable[hash] = new MapElement(k, v);
                     value = null;
                 }
             }
-
+            endTime = System.currentTimeMillis();
         }
-        if(value != null){
+        if (value != null) {
             throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
-        System.out.println("Size: "+super.size());
-        System.out.println("Elements: "+elements);
-        System.out.println("Collisions: "+(collisions));
-        System.out.println("Attempts: "+attempts);
+        System.out.println("------PUT------");     
+        System.out.println("Size: " + super.size());
+        System.out.println("Elements: " + elements);
+        System.out.println("Collisions: " + (collisions));
+        System.out.println("Attempts: " + attempts);
+        System.out.println("TIME: "+(endTime-startTime));
         return value;
     }
 
     @Override
     public Object remove(int k) {
+        long startTime = System.currentTimeMillis();
         Object value = super.remove(k);
-        if(value ==null){
-           collisions++;         
+        long endTime = System.currentTimeMillis();
+        if (value == null) {
+            elements--;
+            startTime = System.currentTimeMillis();
+            for (int i = 1; i < super.size() && value == null; i++) {
+                int hash = (k + i) % size();
+                MapElement me = hashTable[hash];
+                if (me == null) {
+                    value = null;
+                } else if (me.getKey() != k) {
+                    value = null;
+                } else {
+                    hashTable[hash] = null;
+                    value = me.getValue();
+                }
+            }
+            endTime = System.currentTimeMillis();
         }
-        elements--;
-        int attempts = 0; 
-        for(int i = (++k); i<super.size() && value!= null;i++){
-            value = super.remove(k);
-            attempts++;    
-        }
-        System.out.println("Size: "+super.size());
-        System.out.println("Elements: "+elements);
-        System.out.println("Collisions: "+(collisions));
-        System.out.println("Attempts: "+attempts);
-        return value;    
+        System.out.println("------REMOVE------");
+        System.out.println("TIME: "+(endTime-startTime));
+        return value;
     }
 
     @Override
     public Object get(int k) {
+        long startTime = System.currentTimeMillis();
         Object value = super.get(k);
-        int attempts = 0; 
+        long endTime = System.currentTimeMillis();
         if (value == null) { //means either no value in spot or wrong value in spot
-            for (int i = 1; i < super.size() && value != null; i++) {
-                //collisions++;
-                attempts++;
-                int hash = (k+i)%size();
+            startTime = System.currentTimeMillis();
+            for (int i = 1; i < super.size() && value == null; i++) {
+                int hash = (k + i) % size();
                 MapElement me = hashTable[hash];
-                if(me == null){
+                if (me == null) {
                     value = null;
-                }
-                else if (me.getKey() != k) {
+                } else if (me.getKey() != k) {
                     value = null;
-                }
-                else{
-                   value = me.getValue();
+                } else {
+                    value = me.getValue();
                 }
             }
+            endTime = System.currentTimeMillis();
         }
-        System.out.println("Size: "+super.size());
-        System.out.println("Elements: "+elements);
-        System.out.println("Collisions: "+(collisions));
-        System.out.println("Attempts: "+attempts);
-        return value; 
+        if (value == null) {
+            System.out.println("Value could not be found: " + k + ", " + value);
+        }
+        System.out.println("------GET------");
+        System.out.println("TIME: "+(endTime-startTime));
+        return value;
     }
-    
-    
-    
+
 }

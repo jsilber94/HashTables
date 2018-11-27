@@ -54,13 +54,11 @@ public abstract class HashTable {
 
     public Object remove(int k) {
         int hash = this.hashCode(k);
-        long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
         if (me == null || me.getKey() != k) {
             return null;
         } else {
             hashTable[hash] = null;
-            System.out.println(System.currentTimeMillis() - startTime);
             return me.getValue();
         }
     }
@@ -73,14 +71,18 @@ public abstract class HashTable {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
+
         for (MapElement me : hashTable) {
             if (me != null) {
-                sb.append(me.getKey()).append(",").append(me.getValue()).append("|");
+                sb.append(me.getKey()).append("|").append(me.getValue()).append(",");
             } else {
-                sb.append("").append(",").append("").append("|");
+                sb.append("null").append(",");
             }
         }
-        sb.replace(sb.length() - 1, sb.lastIndexOf("|"), "]");
-        return sb.toString();
+
+        sb.replace(sb.length() - 1, sb.lastIndexOf(","), "]");
+        String s = sb.substring(0, sb.length() - 1);
+        return s;
+
     }
 }
