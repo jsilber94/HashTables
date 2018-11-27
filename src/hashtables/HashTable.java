@@ -33,7 +33,9 @@ public abstract class HashTable {
 
         if (me == null) {
             return null;
-        } else if (me.getKey() != k) {
+        }
+        
+        if (me.getKey() != k) {
             return null;
         }
 //        System.out.println(System.currentTimeMillis() - startTime);

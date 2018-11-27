@@ -9,8 +9,8 @@ import java.util.LinkedList;
  */
 public class SeperateChainHash extends HashTable {
 
-    private int elementCounter = 0;
-    private int collusions = 0;
+    public int elementCounter = 0;
+    public int collusions = 0;
 
     public SeperateChainHash(int size) {
         super(size);
@@ -19,16 +19,16 @@ public class SeperateChainHash extends HashTable {
     @Override
     public Object get(int k) {
         //        long startTime = System.currentTimeMillis();
-
+        
         Object value = super.get(k);
         if (value == null) { //no such entry or key is invalid
-            MapElement me = hashTable[super.hashCode(k)];
+            MapElement me = hashTable[super.hashCode(k)]; //get the me
             if (me == null) {//no such entry, return null
                 value = null;
-            } else {//check furthur
+            } else {//key is invalid
                 while (me.getNext() != null) {
                     if (me.getNext().getKey() == k) {
-                        value = me.getValue();
+                        value = me.getNext().getValue();
                         break;
                     }
                     me = me.getNext();

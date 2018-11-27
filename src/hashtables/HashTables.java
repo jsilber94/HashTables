@@ -17,24 +17,27 @@ public class HashTables {
 //        MapElement[] mp = createElements(amountOfElements);
 //        HashTable lph = new LinearProbeHash(capacity);
 //        lph = populateHashTable(lph, mp);
-
 //        MapElement[] mp2 = createElements(amountOfElements);
 //        HashTable qph = new QuadraticProbeHash(capacity);
 //        qph = populateHashTable(qph, mp2);
-       
         MapElement[] mp3 = createElements(amountOfElements);
         HashTable sch = new SeperateChainHash(capacity);
         sch = populateHashTable(sch, mp3);
-
         runGet(sch, mp3);
+        System.out.println("element count: " + ((SeperateChainHash) sch).elementCounter);
         runRemove(sch, mp3);
+        System.out.println("element count: " + ((SeperateChainHash) sch).elementCounter);
+        runGet(sch, mp3);
     }
 
     public static MapElement[] createElements(int capacity) {
         MapElement[] mapElements = new MapElement[capacity];
         for (int i = 0; i < capacity; i++) {
-            mapElements[i] = new MapElement("Value" + i);
+            mapElements[i] = new MapElement(i, "Value" + i);
+//            mapElements[i] = new MapElement("Value" + i);
         }
+        mapElements[49] = new MapElement(117, "Value" + 122);
+        mapElements[48] = new MapElement(118, "Value" + 123);
         return mapElements;
     }
 
@@ -46,31 +49,34 @@ public class HashTables {
                 count++;
             }
         }
-        System.out.println("populate: " + count+"/50");
+        System.out.println("populate: " + count + "/50");
         return ht;
     }
 
     public static void runGet(HashTable ht, MapElement[] mp) {
         int count = 0;
-        for (int i = 0; i < 50; i++) {
-            Object o = ht.get((mp[i].getKey()));
+        for (MapElement mp1 : mp) {
+            Object o = ht.get(mp1.getKey());
             if (o != null) {
+//                System.out.println(o);
                 count++;
             }
         }
-        System.out.println("get: " + count + "/50");
-//        System.out.println(ht.toString());
+        //System.out.println("get: " + count + "/" + mp.length);
+        //System.out.println(ht.toString());
+
     }
 
     public static void runRemove(HashTable ht, MapElement[] mp) {
         int count = 0;
         for (int i = 0; i < 25; i++) {
             Object o = ht.remove(mp[i].getKey());
+            System.out.println(o);
             if (o != null) {
                 count++;
             }
         }
-        System.out.println("remove: " + count+"/25");
+        System.out.println("remove: " + count + "/25");
     }
 
 }
