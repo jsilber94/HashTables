@@ -63,9 +63,12 @@ public class HashTables {
 //                System.out.println(o);
                 count++;
             }
+            else{
+                 System.out.println(mp1.getValue());
+            }
         }
         System.out.println("get: " + count + "/" + mp.length);
-        //System.out.println(ht.toString());
+        System.out.println(ht.toString());
 
     }
 
