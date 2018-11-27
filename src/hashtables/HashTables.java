@@ -24,9 +24,9 @@ public class HashTables {
         HashTable sch = new SeperateChainHash(capacity);
         sch = populateHashTable(sch, mp3);
         runGet(sch, mp3);
-        System.out.println("element count: " + ((SeperateChainHash) sch).elementCounter);
+        System.out.println("element count: " + ((SeperateChainHash) sch).elements);
         runRemove(sch, mp3);
-        System.out.println("element count: " + ((SeperateChainHash) sch).elementCounter);
+        System.out.println("element count: " + ((SeperateChainHash) sch).elements);
         runGet(sch, mp3);
     }
 

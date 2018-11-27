@@ -9,8 +9,8 @@ import java.util.LinkedList;
  */
 public class SeperateChainHash extends HashTable {
 
-    public int elementCounter = 0;
-    public int collusions = 0;
+    public int elements = 0;
+    public int collisions = 0;
 
     public SeperateChainHash(int size) {
         super(size);
@@ -18,10 +18,11 @@ public class SeperateChainHash extends HashTable {
 
     @Override
     public Object get(int k) {
-        //        long startTime = System.currentTimeMillis();
-        
+        long startTime = System.currentTimeMillis(); 
         Object value = super.get(k);
+        long endTime = System.currentTimeMillis();
         if (value == null) { //no such entry or key is invalid
+            startTime = System.currentTimeMillis();
             MapElement me = hashTable[super.hashCode(k)]; //get the me
             if (me == null) {//no such entry, return null
                 value = null;
@@ -34,44 +35,45 @@ public class SeperateChainHash extends HashTable {
                     me = me.getNext();
                 }
             }
-
+            endTime = System.currentTimeMillis();
         }
-//            System.out.println(System.currentTimeMillis() - startTime);
+        System.out.println("------GET------");
+        System.out.println("TIME: "+(endTime-startTime));
         return value;
     }
 
     @Override
     public Object put(int k, Object v) {
-//        long startTime = System.currentTimeMillis();
-
+        long startTime = System.currentTimeMillis();
         int hash = super.hashCode(k);
         MapElement me = hashTable[hash];
-
+        int attempts =0;
         if (me == null) {
             hashTable[hash] = new MapElement(k, v);
         } else { //not null means collusions
-            collusions++;
+            collisions++;
             while (me.getNext() != null) {
+                attempts++;
                 me = me.getNext();
             }
             MapElement originalME = new MapElement(k, v);
             me.setNext(originalME);
         }
-
-        elementCounter++;
-//            System.out.println(size());
-//            System.out.println(elementCounter);
-//            System.out.println(ll.size());
-//            System.out.println(collions);
-//            System.out.println(System.currentTimeMillis() - startTime);   
+        long endTime = System.currentTimeMillis();
+        elements++;
+        System.out.println("------PUT------");     
+        System.out.println("Size: " + super.size());
+        System.out.println("Elements: " + elements);
+        System.out.println("Collisions: " + (collisions));
+        System.out.println("Attempts: " + attempts);
+        System.out.println("TIME: "+(endTime-startTime));
 
         return null;
     }
 
     @Override
     public Object remove(int k) {
-        //        long startTime = System.currentTimeMillis();
-        //Object value = super.remove(k);
+        long startTime = System.currentTimeMillis();
         Object value = null;
         int hash = super.hashCode(k);
         MapElement me = hashTable[hash];
@@ -86,7 +88,7 @@ public class SeperateChainHash extends HashTable {
                     if (next.getKey() == k) {
                         value = next.getValue();
                         me.setNext(next.getNext());
-                        elementCounter--;
+                        elements--;
                         break;
                     }
                     me = next;
@@ -95,10 +97,12 @@ public class SeperateChainHash extends HashTable {
 
             } else { //k is right
                 hashTable[hash] = me.getNext();
-                elementCounter--;
+                elements--;
             }
         }
-        // System.out.println(System.currentTimeMillis() - startTime);
+        long endTime = System.currentTimeMillis();
+        System.out.println("------REMOVE------");
+        System.out.println("TIME: "+(endTime-startTime));
         return value;
     }
 }
