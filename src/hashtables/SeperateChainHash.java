@@ -9,8 +9,8 @@ import java.util.LinkedList;
  */
 public class SeperateChainHash extends HashTable {
 
-    public int elements = 0;
-    public int collisions = 0;
+    private int elements = 0;
+    private int collisions = 0;
 
     public SeperateChainHash(int size) {
         super(size);

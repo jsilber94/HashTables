@@ -17,7 +17,12 @@ public class LinearProbeHash extends HashTable {
     public LinearProbeHash(int size) {
         super(size);
     }
-
+    /**
+     * Puts the value in the location or the next available location
+     * @param k
+     * @param v
+     * @return 
+     */
     @Override
     public Object put(int k, Object v) {
         long startTime, endTime;
@@ -54,7 +59,12 @@ public class LinearProbeHash extends HashTable {
         System.out.println("TIME: "+(endTime-startTime));
         return value;
     }
-
+    /**
+     * removes a key value pair only if the key matches a key in the hashtable, 
+     * otherwise looks linearly for the matching key
+     * @param k
+     * @return 
+     */
     @Override
     public Object remove(int k) {
         long startTime = System.currentTimeMillis();
@@ -81,7 +91,12 @@ public class LinearProbeHash extends HashTable {
         System.out.println("TIME: "+(endTime-startTime));
         return value;
     }
-
+    /**
+     * Gets the value for the associated key, if the key matches, otherwise tries to find it
+     * linearly
+     * @param k
+     * @return 
+     */
     @Override
     public Object get(int k) {
         long startTime = System.currentTimeMillis();

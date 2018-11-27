@@ -14,11 +14,21 @@ public class QuadraticProbeHash extends HashTable {
         super(size);
     }
 
-
+    /**
+     * input to the power of 2
+     * @param k
+     * @return 
+     */
     protected int hash(int k) {
         return (int) (Math.pow(k, 2));
     }
-
+    /**
+     * tries to put the value in hashed position otherwise looks for a new position
+     * that is the key plus a linear increment squared until an available position is ound
+     * @param k
+     * @param v
+     * @return 
+     */
     @Override
     public Object put(int k, Object v) {
         long startTime,endTime;
@@ -57,7 +67,11 @@ public class QuadraticProbeHash extends HashTable {
         System.out.println("TIME: " + (endTime - startTime));
         return value;
     }
-
+    /**
+     * removes the key value pair associated with the given key
+     * @param k
+     * @return 
+     */
     @Override
     public Object remove(int k) {
         long startTime = System.currentTimeMillis();
@@ -91,7 +105,11 @@ public class QuadraticProbeHash extends HashTable {
         return value;
 
     }
-
+    /**
+     * Gets the value associated with the key
+     * @param k
+     * @return 
+     */
     @Override
     public Object get(int k) {
         long startTime = System.currentTimeMillis();
