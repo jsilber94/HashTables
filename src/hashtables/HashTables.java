@@ -1,5 +1,10 @@
 package hashtables;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
+
 /**
  *
  * @author Jesse Silber
@@ -17,29 +22,37 @@ public class HashTables {
 //        MapElement[] mp = createElements(amountOfElements);
 //        HashTable lph = new LinearProbeHash(capacity);
 //        lph = populateHashTable(lph, mp);
+//        MapElement[] mp2 = createElements(amountOfElements);
+//        HashTable qph = new QuadraticProbeHash(capacity);
+//        qph = populateHashTable(qph, mp2);
+        MapElement[] mp3 = createElements(amountOfElements);
+        HashTable sch = new SeperateChainHash(capacity);
+        sch = populateHashTable(sch, mp3);
+        runGet(sch, mp3);
+        runRemove(sch, mp3);
 
-        MapElement[] mp2 = createElements(amountOfElements);
-        HashTable qph = new QuadraticProbeHash(capacity);
-        qph = populateHashTable(qph, mp2);
-        
-//        MapElement[] mp3 = createElements(amountOfElements);
-//        HashTable sch = new SeperateChainHash(capacity);
-//        sch = populateHashTable(sch, mp3);
-        runGet(qph, mp2);
-//        runRemove(qph, mp2);
-
-//        runGet(qph, mp2);
+        runGet(sch, mp3);
 
     }
 
     public static MapElement[] createElements(int capacity) {
+        int count = 0;
+        List<Integer> keys = new ArrayList<>();
+
         MapElement[] mapElements = new MapElement[capacity];
+
         for (int i = 0; i < capacity; i++) {
-//            mapElements[i] = new MapElement(i, "Value" + i);
-            mapElements[i] = new MapElement("Value" + i);
+            MapElement me = new MapElement("Value" + i);
+            
+            while (keys.contains(me.getKey())) {
+                me = new MapElement("Value" + i);
+            }
+
+            keys.add(me.getKey());
+            mapElements[i] = me;
+            count++;
         }
-//        mapElements[49] = new MapElement(117, "Value" + 122);
-//        mapElements[48] = new MapElement(118, "Value" + 123);
+        System.out.println("count: " + count);
         return mapElements;
     }
 
