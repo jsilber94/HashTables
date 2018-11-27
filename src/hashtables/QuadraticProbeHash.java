@@ -7,8 +7,8 @@ package hashtables;
  */
 public class QuadraticProbeHash extends HashTable {
 
-    int collisions = 0;
-    int elements = 0;
+    private int collisions = 0;
+    private int elements = 0;
 
     public QuadraticProbeHash(int size) {
         super(size);

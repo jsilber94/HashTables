@@ -78,7 +78,7 @@ public class HashTables {
             }
         }
         System.out.println("get: " + count + "/" + mp.length);
-        System.out.println(ht.toString());
+        //System.out.println(ht.toString());
 
     }
 
