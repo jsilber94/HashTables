@@ -17,6 +17,7 @@ public class HashTables {
 //        MapElement[] mp = createElements(amountOfElements);
 //        HashTable lph = new LinearProbeHash(capacity);
 //        lph = populateHashTable(lph, mp);
+
         MapElement[] mp2 = createElements(amountOfElements);
         HashTable qph = new QuadraticProbeHash(capacity);
         qph = populateHashTable(qph, mp2);
@@ -28,6 +29,7 @@ public class HashTables {
 //        runRemove(qph, mp2);
 
 //        runGet(qph, mp2);
+
     }
 
     public static MapElement[] createElements(int capacity) {
