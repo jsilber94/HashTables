@@ -46,7 +46,7 @@ public class HashTables {
                 count++;
             }
         }
-        System.out.println("count: " + count);
+        System.out.println("populate: " + count+"/50");
         return ht;
     }
 
@@ -58,8 +58,8 @@ public class HashTables {
                 count++;
             }
         }
-        System.out.println("count: " + count);
-        System.out.println(ht.toString());
+        System.out.println("get: " + count + "/50");
+//        System.out.println(ht.toString());
     }
 
     public static void runRemove(HashTable ht, MapElement[] mp) {
@@ -70,7 +70,7 @@ public class HashTables {
                 count++;
             }
         }
-        System.out.println("count: " + count);
+        System.out.println("remove: " + count+"/25");
     }
 
 }

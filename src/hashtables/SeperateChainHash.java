@@ -42,49 +42,63 @@ public class SeperateChainHash extends HashTable {
 
     @Override
     public Object put(int k, Object v) {
-
 //        long startTime = System.currentTimeMillis();
-        Object value = super.put(k, v);
 
-        if (value != null) { //not null means collusions
+        int hash = super.hashCode(k);
+        MapElement me = hashTable[hash];
+
+        if (me == null) {
+            hashTable[hash] = new MapElement(k, v);
+        } else { //not null means collusions
             collusions++;
-            MapElement me = hashTable[super.hashCode(k)]; //first me in the table
             while (me.getNext() != null) {
                 me = me.getNext();
             }
-            MapElement newME = new MapElement(k, v);
-            me.setNext(newME);
+            MapElement originalME = new MapElement(k, v);
+            me.setNext(originalME);
         }
+
         elementCounter++;
 //            System.out.println(size());
 //            System.out.println(elementCounter);
 //            System.out.println(ll.size());
 //            System.out.println(collions);
 //            System.out.println(System.currentTimeMillis() - startTime);   
+
         return null;
     }
 
     @Override
     public Object remove(int k) {
         //        long startTime = System.currentTimeMillis();
-        Object value = super.remove(k);
-        if (value == null) {
-            MapElement me = hashTable[super.hashCode(k)];
-            MapElement next = me.getNext();
-            
-            while (next.getNext() != null) {
-                if (next.getKey() == k) {
-                    value = next.getValue();
-                    me.setNext(next.getNext());
-                    break;
+        //Object value = super.remove(k);
+        Object value = null;
+        int hash = super.hashCode(k);
+        MapElement me = hashTable[hash];
+        if (me != null) {
+            value = me.getValue();
+
+            if (me.getKey() != k) { //k isnt right
+
+                MapElement next = me.getNext(); //second element
+
+                while (next != null) {
+                    if (next.getKey() == k) {
+                        value = next.getValue();
+                        me.setNext(next.getNext());
+                        elementCounter--;
+                        break;
+                    }
+                    me = next;
+                    next = me.getNext();
                 }
-                me = next;
-                next = me.getNext();
+
+            } else { //k is right
+                hashTable[hash] = me.getNext();
+                elementCounter--;
             }
         }
-
         // System.out.println(System.currentTimeMillis() - startTime);
         return value;
     }
-
 }
