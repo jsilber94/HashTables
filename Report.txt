@@ -1,5 +1,12 @@
 Step 4
-This step works as inteneded the HashTable puts, gets and removes it's respected elements. Each operation takes less than 0 milliseconds according to the timer. The only collisions that happen are the keys that are the same, moving them to the next available position based on their collision technique. Linear probing, the next available position is used. Quadratic probing uses the key plus an integer squared location, cut down then by the size to fit, until it finds the next available place. Seperate chaining uses the   Below are a selection of the values printed to the console. 
+This step works as inteneded the HashTable puts, gets and removes it's respected elements. Each operation takes less than 0 milliseconds according to the timer. The only collisions that happen are the values that overlap when hashed, (mod 100) they are then handled by their technique. Linear probing, the next available position is used. Quadratic probing uses the key plus an integer squared location, cut down then by the size to fit, until it finds the next available place. Seperate chaining uses a linked list style in order to add MapElement to the same location, each containing their key and value at the location. There aren't that many collisions due to the fact that the amount of values being placed into the table is half the size of the HashTable, therefore it won't take much time. Below are a selection of the values printed to the console.
+------PUT------	------GET------	------REMOVE------
+Size: 100	TIME: 0		TIME: 0
+Elements: 11
+Collisions: 1
+Attempts: 0
+TIME: 0
+
 Step 5
 1)
 2)
