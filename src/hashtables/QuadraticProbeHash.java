@@ -13,9 +13,9 @@ public class QuadraticProbeHash extends HashTable {
     public QuadraticProbeHash(int size) {
         super(size);
     }
-    
+
     private int hashCode(int k) {
-        return (int) (Math.pow(k, 2)) % size();
+        return (int) (Math.pow(k, 2));
     }
 
     @Override
@@ -24,7 +24,7 @@ public class QuadraticProbeHash extends HashTable {
         if (value != null) {
             for (int i = 1; i < super.size() && value != null; i++) {
                 collision++;
-                int hash = hashCode(k+i);
+                int hash = (k + hashCode(i)) % super.size();
                 MapElement me = hashTable[hash];
                 if (me == null) {
                     hashTable[hash] = new MapElement(k, v);
@@ -42,31 +42,43 @@ public class QuadraticProbeHash extends HashTable {
 
     @Override
     public Object remove(int k) {
-        Object o = super.remove(k);
-        if (o == null) {
-            return null;
-        } else {
-
-            return null;
+        Object value = super.remove(k);
+        if (value == null) { //means either no value in spot or wrong value in spot
+            for (int i = 1; i < super.size() && value == null; i++) {
+                collision++;
+                int hash = (k + hashCode(i)) % super.size();
+                MapElement me = hashTable[hash];
+                if (me == null) {
+                    value = null;
+                } else if (me.getKey() != k) {
+                    value = null;
+                } else {
+                    hashTable[hash] = null;
+                    value = me.getValue();
+                }
+            }
         }
+        if (value == null) {
+            System.out.println("Value could not be found: " + k + ", " + value);
+
+        }
+        return value;
     }
 
     @Override
     public Object get(int k) {
         Object value = super.get(k);//k is the original key, value is either null or right value
         if (value == null) { //means either no value in spot or wrong value in spot
-            for (int i = 1; i < super.size() && value != null; i++) {
+            for (int i = 1; i < super.size() && value == null; i++) {
                 collision++;
-                int hash = hashCode(k+i);
+                int hash = (k + hashCode(i)) % super.size();
                 MapElement me = hashTable[hash];
-                if(me == null){
+                if (me == null) {
                     value = null;
-                }
-                else if (me.getKey() != k) {
+                } else if (me.getKey() != k) {
                     value = null;
-                }
-                else{
-                   value = me.getValue();
+                } else {
+                    value = me.getValue();
                 }
             }
         }
