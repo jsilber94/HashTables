@@ -22,43 +22,40 @@ public class QuadraticProbeHash extends HashTable {
     @Override
     public Object put(int k, Object v) {
         long startTime,endTime;
-        //MapElement value;
-        Object returnVal;
         int attempts = 0;
         startTime = System.currentTimeMillis();
-        returnVal = hashTable[super.hashCode(k)];
-        if(returnVal == null){
-        returnVal = super.put(k, v);
+        Object value = hashTable[super.hashCode(k)];
+        if(value == null){
+        value = super.put(k, v);
         endTime = System.currentTimeMillis();
         }
         else{         
             startTime = System.currentTimeMillis();
             collisions++;
-            for (int i = 1; i < super.size() && returnVal != null; i++) {
+            for (int i = 1; i < super.size() && value != null; i++) {
                 attempts++;
                 int hash = (k + hash(i)) % super.size();
                 MapElement me = hashTable[hash];
                 if (me == null) {
                     hashTable[hash] = new MapElement(k, v);
-                    returnVal = null;
+                    value = null;
                 }
             }
             endTime = System.currentTimeMillis();
         }
         
         elements++;
-        if (returnVal != null) {
+        if (value != null) {
             throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
         
         System.out.println("------PUT------");
-        System.out.println(k+", "+v);
         System.out.println("Size: " + super.size());
         System.out.println("Elements: " + elements);
         System.out.println("Collisions: " + (collisions));
         System.out.println("Attempts: " + attempts);
         System.out.println("TIME: " + (endTime - startTime));
-        return returnVal;
+        return value;
     }
 
     @Override

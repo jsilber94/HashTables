@@ -1,0 +1,7 @@
+Step 4
+This step works as inteneded the HashTable puts, gets and removes it's respected elements. Each operation takes less than 0 milliseconds according to the timer. The only collisions that happen are the keys that are the same, moving them to the next available position based on their collision technique. Linear probing, the next available position is used. Quadratic probing uses the key plus an integer squared location, cut down then by the size to fit, until it finds the next available place. Seperate chaining uses the   Below are a selection of the values printed to the console. 
+Step 5
+1)
+2)
+3)
+Step 6

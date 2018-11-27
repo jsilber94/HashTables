@@ -20,12 +20,15 @@ public class LinearProbeHash extends HashTable {
 
     @Override
     public Object put(int k, Object v) {
-        long startTime = System.currentTimeMillis();
-        Object value = super.put(k, v);
-        long endTime = System.currentTimeMillis();
-        elements++;
+        long startTime, endTime;
         int attempts = 0;
-        if (value != null) {
+        startTime = System.currentTimeMillis();
+        Object value = hashTable[super.hashCode(k)];
+        if(value ==null){
+        value = super.put(k, v);
+        endTime = System.currentTimeMillis();
+        }
+        else{
             startTime = System.currentTimeMillis();
             collisions++;
             for (int i = 1; i < super.size() && value != null; i++) {
@@ -39,6 +42,7 @@ public class LinearProbeHash extends HashTable {
             }
             endTime = System.currentTimeMillis();
         }
+        elements++; 
         if (value != null) {
             throw new IndexOutOfBoundsException("No more room in the hashtable");
         }
