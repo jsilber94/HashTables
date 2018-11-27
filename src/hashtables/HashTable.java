@@ -67,7 +67,7 @@ public abstract class HashTable {
         }
     }
 
-    public int hashCode(int k) {
+    private int hashCode(int k) {
         return k % size();
     }
     

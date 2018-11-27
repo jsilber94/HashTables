@@ -13,8 +13,8 @@ public class QuadraticProbeHash extends HashTable {
     public QuadraticProbeHash(int size) {
         super(size);
     }
-
-    private int hashcode(int k) {
+    
+    private int hashCode(int k) {
         return (int) (Math.pow(k, 2)) % size();
     }
 
