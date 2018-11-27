@@ -52,7 +52,7 @@ public class HashTables {
             }
         }
         System.out.println("count: " + count);
-//        System.out.println(ht.toString());
+        System.out.println(ht.toString());
     }
 
     public static void runRemove(HashTable ht, MapElement[] mp) {

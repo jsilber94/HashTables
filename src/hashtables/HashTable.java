@@ -75,11 +75,13 @@ public abstract class HashTable {
         sb.append("[");
                 for(MapElement me: hashTable){
                     if (me!=null)
-                    sb.append(me.getKey()).append(",").append(me.getValue()).append("|");
+                    sb.append(me.getKey()).append("|").append(me.getValue()).append(",");
                     else
-                        sb.append("").append(",").append("").append("|");
+                        sb.append("null").append(",");
                 }
-          sb.replace(sb.length()-1,sb.lastIndexOf("|"),"]");
-        return sb.toString();
+                
+          sb.replace(sb.length()-1,sb.lastIndexOf(","),"]");
+          String s = sb.substring(0, sb.length()-1);
+        return s;
     }
 }
