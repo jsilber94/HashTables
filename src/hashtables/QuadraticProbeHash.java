@@ -14,8 +14,8 @@ public class QuadraticProbeHash extends HashTable {
         super(size);
     }
 
-    @Override
-    protected int hashCode(int k) {
+
+    protected int hash(int k) {
         return (int) (Math.pow(k, 2));
     }
 
@@ -30,7 +30,7 @@ public class QuadraticProbeHash extends HashTable {
             collisions++;
             for (int i = 1; i < super.size() && value != null; i++) {
                 attempts++;
-                int hash = (k + hashCode(i)) % super.size();
+                int hash = (k + hash(i)) % super.size();
                 MapElement me = hashTable[hash];
                 if (me == null) {
                     hashTable[hash] = new MapElement(k, v);
@@ -62,7 +62,7 @@ public class QuadraticProbeHash extends HashTable {
             startTime = System.currentTimeMillis();
             for (int i = 1; i < super.size() && value == null; i++) {
 
-                int hash = (k + hashCode(i)) % super.size();
+                int hash = (k + hash(i)) % super.size();
                 MapElement me = hashTable[hash];
                 if (me == null) {
                     value = null;
@@ -94,7 +94,7 @@ public class QuadraticProbeHash extends HashTable {
         if (value == null) { //means either no value in spot or wrong value in spot
             startTime = System.currentTimeMillis();
             for (int i = 1; i < super.size() && value == null; i++) {
-                int hash = (k + hashCode(i)) % super.size();
+                int hash = (k + hash(i)) % super.size();
                 MapElement me = hashTable[hash];
                 if (me == null) {
                     value = null;

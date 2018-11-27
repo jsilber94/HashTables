@@ -27,7 +27,7 @@ public abstract class HashTable {
     }
 
     public Object get(int k) {
-        int hash = this.hashCode(k);
+        int hash = hashCode(k);
         //long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
 
@@ -43,7 +43,7 @@ public abstract class HashTable {
     }
 
     public Object put(int k, Object v) {
-        int hash = this.hashCode(k);
+        int hash = hashCode(k);
         MapElement me = hashTable[hash];
         if (me != null) {
             hashTable[hash] = new MapElement(k, v);
@@ -55,7 +55,7 @@ public abstract class HashTable {
     }
 
     public Object remove(int k) {
-        int hash = this.hashCode(k);
+        int hash = hashCode(k);
         MapElement me = hashTable[hash];
         if (me == null || me.getKey() != k) {
             return null;

@@ -17,27 +17,27 @@ public class HashTables {
 //        MapElement[] mp = createElements(amountOfElements);
 //        HashTable lph = new LinearProbeHash(capacity);
 //        lph = populateHashTable(lph, mp);
-//        MapElement[] mp2 = createElements(amountOfElements);
-//        HashTable qph = new QuadraticProbeHash(capacity);
-//        qph = populateHashTable(qph, mp2);
-        MapElement[] mp3 = createElements(amountOfElements);
-        HashTable sch = new SeperateChainHash(capacity);
-        sch = populateHashTable(sch, mp3);
-        runGet(sch, mp3);
-        System.out.println("element count: " + ((SeperateChainHash) sch).elementCounter);
-        runRemove(sch, mp3);
-        System.out.println("element count: " + ((SeperateChainHash) sch).elementCounter);
-        runGet(sch, mp3);
+        MapElement[] mp2 = createElements(amountOfElements);
+        HashTable qph = new QuadraticProbeHash(capacity);
+        qph = populateHashTable(qph, mp2);
+        
+//        MapElement[] mp3 = createElements(amountOfElements);
+//        HashTable sch = new SeperateChainHash(capacity);
+//        sch = populateHashTable(sch, mp3);
+        runGet(qph, mp2);
+//        runRemove(qph, mp2);
+
+//        runGet(qph, mp2);
     }
 
     public static MapElement[] createElements(int capacity) {
         MapElement[] mapElements = new MapElement[capacity];
         for (int i = 0; i < capacity; i++) {
-            mapElements[i] = new MapElement(i, "Value" + i);
-//            mapElements[i] = new MapElement("Value" + i);
+//            mapElements[i] = new MapElement(i, "Value" + i);
+            mapElements[i] = new MapElement("Value" + i);
         }
-        mapElements[49] = new MapElement(117, "Value" + 122);
-        mapElements[48] = new MapElement(118, "Value" + 123);
+//        mapElements[49] = new MapElement(117, "Value" + 122);
+//        mapElements[48] = new MapElement(118, "Value" + 123);
         return mapElements;
     }
 
@@ -62,7 +62,7 @@ public class HashTables {
                 count++;
             }
         }
-        //System.out.println("get: " + count + "/" + mp.length);
+        System.out.println("get: " + count + "/" + mp.length);
         //System.out.println(ht.toString());
 
     }
@@ -71,7 +71,7 @@ public class HashTables {
         int count = 0;
         for (int i = 0; i < 25; i++) {
             Object o = ht.remove(mp[i].getKey());
-            System.out.println(o);
+//            System.out.println(o);
             if (o != null) {
                 count++;
             }
