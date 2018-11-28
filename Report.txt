@@ -8,7 +8,25 @@ Attempts: 0
 TIME: 0
 
 Step 5
-1)The time for put increases becasue the number of colissions increases, worst case linear probing will run at O(N) where N is size of the table until it does not find an availabe location. The same goes for Quadratic probing. Whereas for seperate chaining, the list with the location can get long, and there will need to be a loop, for each collision that at worst case is O(N). Once approaching 100 values, it starts to slow done, once 100 is passed every value after that starts looping through N to find an available location. That slows down the HashTable drastically. 
-2)
+1)Due to the fact that 150 is such a low value, and the hastable is only of size 100, there are at most 100 collisions for each value from 101 to 150. There is not a drastic time increase. But there are values that cannot be get because they could not be put into the HashTable.
+2)The put could take longer if the length was a lot longer, however due to the fact that the length is smaller, it takes a lot less time in order to probe the table.
 3)
+------PUT------
+Size: 101
+Elements: 101
+Collisions: 43
+Attempts: 10
+TIME: 0
+
+------PUT------
+Size: 100
+Elements: 100
+Collisions: 53
+Attempts: 3
+TIME: 0
+
+There are less collisions with 101 before the table is filled.
+
 Step 6
+
+
