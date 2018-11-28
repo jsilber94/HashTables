@@ -49,7 +49,7 @@ public class LinearProbeHash extends HashTable {
         }
         elements++; 
         if (value != null) {
-            throw new IndexOutOfBoundsException("No more room in the hashtable");
+            System.out.println("HASHTABLE IS FULL");
         }
         System.out.println("------PUT------");     
         System.out.println("Size: " + super.size());
