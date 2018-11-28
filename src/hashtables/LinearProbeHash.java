@@ -17,6 +17,18 @@ public class LinearProbeHash extends HashTable {
     public LinearProbeHash(int size) {
         super(size);
     }
+    
+    private void resize(){
+        if((super.size()/2)<=elements){
+            LinearProbeHash lph = new LinearProbeHash(size()*2);
+            for(int i = 0; i<super.size();i++){
+            MapElement me = hashTable[i];
+                if(me != null){
+                    lph.put(me.getKey(),me.getValue());
+                }            
+            }
+        }
+    }
     /**
      * Puts the value in the location or the next available location
      * @param k

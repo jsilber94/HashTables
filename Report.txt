@@ -25,8 +25,7 @@ Collisions: 53
 Attempts: 3
 TIME: 0
 
-There are less collisions with 101 before the table is filled.
+There are less collisions with 101 before the table is filled, due to teh fact taht the numbers are not evenly divisible by 101, giving different remainder results, ie 38, 138, 1038, would all be 38 for 100, where as for 101, 38 would be 38, 138 would be 37, 1038 would be 28. Giving better seperation.
 
 Step 6
-
 
