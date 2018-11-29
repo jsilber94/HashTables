@@ -5,7 +5,8 @@ import java.util.Objects;
 /**
  *
  * @author Jesse Silber
- * @param <V>
+ * @author Max Page-Slowik
+ * @param <V>   Generic Value
  */
 public class MapElement <V>{
 

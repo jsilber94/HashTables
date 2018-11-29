@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hashtables;
 
 /**
  *
  * @author Max Page-Slowik
+ * @author Jesse Silber
  */
 public class LinearProbeHash extends HashTable {
 
@@ -17,23 +13,45 @@ public class LinearProbeHash extends HashTable {
     public LinearProbeHash(int size) {
         super(size);
     }
-    
-    private void resize(){
-        if((super.size()/2)<=elements){
-            LinearProbeHash lph = new LinearProbeHash(size()*2);
-            for(int i = 0; i<super.size();i++){
-            MapElement me = hashTable[i];
-                if(me != null){
-                    lph.put(me.getKey(),me.getValue());
-                }            
-            }
-        }
+
+    protected void setNewSize(int size) {
+        hashTable = new MapElement[size];
+        elements = 0;
+        collisions = 0;
     }
+
+    private void reSize() {
+        if (elements >= super.size() / 2) {
+            MapElement mapElements[] = new MapElement[super.size()];
+            int newSize = super.size() * 2;
+            for (int i = 0; i < mapElements.length; i++) {
+                mapElements[i] = hashTable[i];
+            }
+            reHash(newSize, mapElements);
+        }
+
+    }
+
+    private boolean reHash(int newSize, MapElement mapElements[]) {
+        if (mapElements != null && mapElements.length != 0) {
+            setNewSize(newSize);
+
+            for (MapElement mp : mapElements) {
+                if (mp != null) {
+                    this.put(mp.getKey(), mp.getValue());
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
     /**
      * Puts the value in the location or the next available location
-     * @param k
-     * @param v
-     * @return 
+     *
+     * @param k key
+     * @param v value
+     * @return null or value of element in the table
      */
     @Override
     public Object put(int k, Object v) {
@@ -41,11 +59,10 @@ public class LinearProbeHash extends HashTable {
         int attempts = 0;
         startTime = System.currentTimeMillis();
         Object value = hashTable[super.hashCode(k)];
-        if(value ==null){
-        value = super.put(k, v);
-        endTime = System.currentTimeMillis();
-        }
-        else{
+        if (value == null) {
+            value = super.put(k, v);
+            endTime = System.currentTimeMillis();
+        } else {
             startTime = System.currentTimeMillis();
             collisions++;
             for (int i = 1; i < super.size() && value != null; i++) {
@@ -59,23 +76,26 @@ public class LinearProbeHash extends HashTable {
             }
             endTime = System.currentTimeMillis();
         }
-        elements++; 
+        elements++;
         if (value != null) {
             System.out.println("HASHTABLE IS FULL");
         }
-        System.out.println("------PUT------");     
+        System.out.println("------PUT------");
         System.out.println("Size: " + super.size());
         System.out.println("Elements: " + elements);
         System.out.println("Collisions: " + (collisions));
         System.out.println("Attempts: " + attempts);
-        System.out.println("TIME: "+(endTime-startTime));
+        System.out.println("TIME: " + (endTime - startTime));
+        reSize();
         return value;
     }
+
     /**
-     * removes a key value pair only if the key matches a key in the hashtable, 
+     * removes a key value pair only if the key matches a key in the hash table,
      * otherwise looks linearly for the matching key
-     * @param k
-     * @return 
+     *
+     * @param k key
+     * @return null or the value removed
      */
     @Override
     public Object remove(int k) {
@@ -100,14 +120,16 @@ public class LinearProbeHash extends HashTable {
             endTime = System.currentTimeMillis();
         }
         System.out.println("------REMOVE------");
-        System.out.println("TIME: "+(endTime-startTime));
+        System.out.println("TIME: " + (endTime - startTime));
         return value;
     }
+
     /**
-     * Gets the value for the associated key, if the key matches, otherwise tries to find it
-     * linearly
-     * @param k
-     * @return 
+     * Gets the value for the associated key, if the key matches, otherwise
+     * tries to find it linearly
+     *
+     * @param k key
+     * @return value or null if it is not there
      */
     @Override
     public Object get(int k) {
@@ -133,7 +155,7 @@ public class LinearProbeHash extends HashTable {
             System.out.println("Value could not be found: " + k + ", " + value);
         }
         System.out.println("------GET------");
-        System.out.println("TIME: "+(endTime-startTime));
+        System.out.println("TIME: " + (endTime - startTime));
         return value;
     }
 

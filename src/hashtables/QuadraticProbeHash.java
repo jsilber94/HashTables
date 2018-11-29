@@ -16,18 +16,18 @@ public class QuadraticProbeHash extends HashTable {
 
     /**
      * input to the power of 2
-     * @param k
-     * @return 
+     * @param k key
+     * @return hash 
      */
     protected int hash(int k) {
         return (int) (Math.pow(k, 2));
     }
     /**
      * tries to put the value in hashed position otherwise looks for a new position
-     * that is the key plus a linear increment squared until an available position is ound
-     * @param k
-     * @param v
-     * @return 
+     * that is the key plus a linear increment squared until an available position is found
+     * @param k key
+     * @param v value
+     * @return  null if empty or value in the spot
      */
     @Override
     public Object put(int k, Object v) {
@@ -69,8 +69,8 @@ public class QuadraticProbeHash extends HashTable {
     }
     /**
      * removes the key value pair associated with the given key
-     * @param k
-     * @return 
+     * @param k key
+     * @return null or the value that was removed
      */
     @Override
     public Object remove(int k) {
@@ -107,8 +107,8 @@ public class QuadraticProbeHash extends HashTable {
     }
     /**
      * Gets the value associated with the key
-     * @param k
-     * @return 
+     * @param k key
+     * @return null or the value in the spot
      */
     @Override
     public Object get(int k) {

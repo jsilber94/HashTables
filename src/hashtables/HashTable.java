@@ -7,7 +7,7 @@ package hashtables;
  */
 public abstract class HashTable {
 
-    protected final MapElement[] hashTable;
+    protected MapElement[] hashTable;
 
     public HashTable(int size) {
         hashTable = new MapElement[size];
@@ -28,17 +28,15 @@ public abstract class HashTable {
 
     public Object get(int k) {
         int hash = hashCode(k);
-        //long startTime = System.currentTimeMillis();
         MapElement me = hashTable[hash];
 
         if (me == null) {
             return null;
         }
-        
+
         if (me.getKey() != k) {
             return null;
         }
-//        System.out.println(System.currentTimeMillis() - startTime);
         return me.getValue();
     }
 

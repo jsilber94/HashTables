@@ -1,7 +1,5 @@
 package hashtables;
 
-import java.util.LinkedList;
-
 /**
  *
  * @author Max Page-Slowik
@@ -16,9 +14,16 @@ public class SeperateChainHash extends HashTable {
         super(size);
     }
 
+    /**
+     * Gets the value for the associated key, if the key matches, otherwise
+     * checks the next value
+     *
+     * @param k key
+     * @return the value or null
+     */
     @Override
     public Object get(int k) {
-        long startTime = System.currentTimeMillis(); 
+        long startTime = System.currentTimeMillis();
         Object value = super.get(k);
         long endTime = System.currentTimeMillis();
         if (value == null) { //no such entry or key is invalid
@@ -38,16 +43,23 @@ public class SeperateChainHash extends HashTable {
             endTime = System.currentTimeMillis();
         }
         System.out.println("------GET------");
-        System.out.println("TIME: "+(endTime-startTime));
+        System.out.println("TIME: " + (endTime - startTime));
         return value;
     }
 
+    /**
+     * Puts the value in the location or in the "next" spot
+     *
+     * @param k key
+     * @param v value
+     * @return null
+     */
     @Override
     public Object put(int k, Object v) {
         long startTime = System.currentTimeMillis();
         int hash = super.hashCode(k);
         MapElement me = hashTable[hash];
-        int attempts =0;
+        int attempts = 0;
         if (me == null) {
             hashTable[hash] = new MapElement(k, v);
         } else { //not null means collusions
@@ -61,16 +73,23 @@ public class SeperateChainHash extends HashTable {
         }
         long endTime = System.currentTimeMillis();
         elements++;
-        System.out.println("------PUT------");     
+        System.out.println("------PUT------");
         System.out.println("Size: " + super.size());
         System.out.println("Elements: " + elements);
         System.out.println("Collisions: " + (collisions));
         System.out.println("Attempts: " + attempts);
-        System.out.println("TIME: "+(endTime-startTime));
+        System.out.println("TIME: " + (endTime - startTime));
 
         return null;
     }
 
+    /**
+     * removes a key value pair only if the key matches a key in the hash table,
+     * otherwise looks for the 'next' value
+     *
+     * @param k key
+     * @return the value or null
+     */
     @Override
     public Object remove(int k) {
         long startTime = System.currentTimeMillis();
@@ -102,7 +121,7 @@ public class SeperateChainHash extends HashTable {
         }
         long endTime = System.currentTimeMillis();
         System.out.println("------REMOVE------");
-        System.out.println("TIME: "+(endTime-startTime));
+        System.out.println("TIME: " + (endTime - startTime));
         return value;
     }
 }
