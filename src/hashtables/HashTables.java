@@ -15,21 +15,33 @@ public class HashTables {
     public static void main(String[] args) {
 
         int capacity = 100;
+        int capacity1 = 101;
         int amountOfElements = 50;
-
-//        MapElement[] mp = createElements(amountOfElements);
+        int amountOfElements1 = 150;
+        //all the linear probing questions
+//        System.out.println("\nLINEAR PROBING\n");
+//        MapElement[] mp = createElements(amountOfElements1);
 //        HashTable lph = new LinearProbeHash(capacity);
 //        lph = populateHashTable(lph, mp);
-//        MapElement[] mp2 = createElements(amountOfElements);
-//        HashTable qph = new QuadraticProbeHash(capacity);
-//        qph = populateHashTable(qph, mp2);
-        MapElement[] mp3 = createElements(amountOfElements);
-        HashTable sch = new SeperateChainHash(capacity);
-        sch = populateHashTable(sch, mp3);
-        runGet(sch, mp3);
-        runRemove(sch, mp3);
-
-        runGet(sch, mp3);
+//        runGet(lph, mp);
+//        runRemove(lph, mp);
+//        runGet(lph, mp);
+        //all the quadratic probing methods
+        System.out.println("\nQUADRATIC PROBING\n");
+        MapElement[] mp2 = createElements(amountOfElements1);
+        HashTable qph = new QuadraticProbeHash(capacity1);
+        qph = populateHashTable(qph, mp2);
+        runGet(qph, mp2);
+        runRemove(qph, mp2);
+        runGet(qph, mp2);
+        //all the seperate chaining methods
+//        System.out.println("\nSEPERATE CHAINING\n");
+//        MapElement[] mp3 = createElements(amountOfElements1);
+//        HashTable sch = new SeperateChainHash(capacity);
+//        sch = populateHashTable(sch, mp3);
+//        runGet(sch, mp3);
+//        runRemove(sch, mp3);
+//        runGet(sch, mp3);
 
     }
 
@@ -62,7 +74,7 @@ public class HashTables {
                 count++;
             }
         }
-        System.out.println("populate: " + count + "/50");
+        System.out.println("populate: " + count + "/"+mp.length);
         return ht;
     }
 

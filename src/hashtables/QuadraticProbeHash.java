@@ -7,26 +7,40 @@ package hashtables;
  */
 public class QuadraticProbeHash extends HashTable {
 
-    int collisions = 0;
-    int elements = 0;
+    private int collisions = 0;
+    private int elements = 0;
 
     public QuadraticProbeHash(int size) {
         super(size);
     }
 
-
+    /**
+     * input to the power of 2
+     * @param k
+     * @return 
+     */
     protected int hash(int k) {
         return (int) (Math.pow(k, 2));
     }
-
+    /**
+     * tries to put the value in hashed position otherwise looks for a new position
+     * that is the key plus a linear increment squared until an available position is ound
+     * @param k
+     * @param v
+     * @return 
+     */
     @Override
     public Object put(int k, Object v) {
-        long startTime = System.currentTimeMillis();
-        Object value = super.put(k, v);
-        long endTime = System.currentTimeMillis();
-        elements++;
+        long startTime,endTime;
         int attempts = 0;
-        if (value != null) {
+        startTime = System.currentTimeMillis();
+        Object value = hashTable[super.hashCode(k)];
+        if(value == null){
+        value = super.put(k, v);
+        endTime = System.currentTimeMillis();
+        }
+        else{         
+            startTime = System.currentTimeMillis();
             collisions++;
             for (int i = 1; i < super.size() && value != null; i++) {
                 attempts++;
@@ -37,11 +51,14 @@ public class QuadraticProbeHash extends HashTable {
                     value = null;
                 }
             }
-
+            endTime = System.currentTimeMillis();
         }
+        
+        elements++;
         if (value != null) {
-            throw new IndexOutOfBoundsException("No more room in the hashtable");
+            System.out.println("HASHTABLE IS FULL");
         }
+        
         System.out.println("------PUT------");
         System.out.println("Size: " + super.size());
         System.out.println("Elements: " + elements);
@@ -50,7 +67,11 @@ public class QuadraticProbeHash extends HashTable {
         System.out.println("TIME: " + (endTime - startTime));
         return value;
     }
-
+    /**
+     * removes the key value pair associated with the given key
+     * @param k
+     * @return 
+     */
     @Override
     public Object remove(int k) {
         long startTime = System.currentTimeMillis();
@@ -84,7 +105,11 @@ public class QuadraticProbeHash extends HashTable {
         return value;
 
     }
-
+    /**
+     * Gets the value associated with the key
+     * @param k
+     * @return 
+     */
     @Override
     public Object get(int k) {
         long startTime = System.currentTimeMillis();

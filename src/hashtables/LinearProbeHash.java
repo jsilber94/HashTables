@@ -17,15 +17,35 @@ public class LinearProbeHash extends HashTable {
     public LinearProbeHash(int size) {
         super(size);
     }
-
+    
+    private void resize(){
+        if((super.size()/2)<=elements){
+            LinearProbeHash lph = new LinearProbeHash(size()*2);
+            for(int i = 0; i<super.size();i++){
+            MapElement me = hashTable[i];
+                if(me != null){
+                    lph.put(me.getKey(),me.getValue());
+                }            
+            }
+        }
+    }
+    /**
+     * Puts the value in the location or the next available location
+     * @param k
+     * @param v
+     * @return 
+     */
     @Override
     public Object put(int k, Object v) {
-        long startTime = System.currentTimeMillis();
-        Object value = super.put(k, v);
-        long endTime = System.currentTimeMillis();
-        elements++;
+        long startTime, endTime;
         int attempts = 0;
-        if (value != null) {
+        startTime = System.currentTimeMillis();
+        Object value = hashTable[super.hashCode(k)];
+        if(value ==null){
+        value = super.put(k, v);
+        endTime = System.currentTimeMillis();
+        }
+        else{
             startTime = System.currentTimeMillis();
             collisions++;
             for (int i = 1; i < super.size() && value != null; i++) {
@@ -39,8 +59,9 @@ public class LinearProbeHash extends HashTable {
             }
             endTime = System.currentTimeMillis();
         }
+        elements++; 
         if (value != null) {
-            throw new IndexOutOfBoundsException("No more room in the hashtable");
+            System.out.println("HASHTABLE IS FULL");
         }
         System.out.println("------PUT------");     
         System.out.println("Size: " + super.size());
@@ -50,7 +71,12 @@ public class LinearProbeHash extends HashTable {
         System.out.println("TIME: "+(endTime-startTime));
         return value;
     }
-
+    /**
+     * removes a key value pair only if the key matches a key in the hashtable, 
+     * otherwise looks linearly for the matching key
+     * @param k
+     * @return 
+     */
     @Override
     public Object remove(int k) {
         long startTime = System.currentTimeMillis();
@@ -77,7 +103,12 @@ public class LinearProbeHash extends HashTable {
         System.out.println("TIME: "+(endTime-startTime));
         return value;
     }
-
+    /**
+     * Gets the value for the associated key, if the key matches, otherwise tries to find it
+     * linearly
+     * @param k
+     * @return 
+     */
     @Override
     public Object get(int k) {
         long startTime = System.currentTimeMillis();
