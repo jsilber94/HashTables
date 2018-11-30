@@ -28,4 +28,16 @@ TIME: 0
 There are less collisions with 101 before the table is filled, due to teh fact taht the numbers are not evenly divisible by 101, giving different remainder results, ie 38, 138, 1038, would all be 38 for 100, where as for 101, 38 would be 38, 138 would be 37, 1038 would be 28. Giving better seperation.
 
 Step 6
+------PUT------
+Size: 32768
+Elements: 10000
+Collisions: 1153
+Attempts: 0
+TIME: 0
+BUILD SUCCESSFUL (total time: 13 seconds)
+
+The size increasing adds extra time as well as the general put starts taking a longer amount of time.
+In order to run all the puts and the gets for the elements it takes around 12-13 seconds, which for a hastable is costly time, however the actual puts and get take under 0 milliseconds, which is still beneficial. The number of collisions also jump up.
+
+
 

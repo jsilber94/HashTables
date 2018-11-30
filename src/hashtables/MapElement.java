@@ -16,7 +16,7 @@ public class MapElement <V>{
 
     public MapElement(V value) {
         this.value = value;
-        this.key = (int) (Math.random() * 1000);
+        this.key = (int) (Math.random() * 100000);
     }
     public MapElement(int key, V value) {
         this.value = value;
