@@ -18,10 +18,13 @@ public class HashTables {
     
     public static void run(){
         
-        int capacity = 128;
+        int capacity = 100;
         int capacity1 = 101;
-        int amountOfElements = 10000;
+        int capacity2 = 128;
+        int amountOfElements = 50;
         int amountOfElements1 = 150;
+        int amountOfElements2 = 10000;
+
         //all the linear probing questions
         System.out.println("\nLINEAR PROBING\n");
         MapElement[] mp = createElements(amountOfElements);
