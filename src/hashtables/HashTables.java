@@ -13,10 +13,14 @@ public class HashTables {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
-        int capacity = 100;
+        run();
+    }
+    
+    public static void run(){
+        
+        int capacity = 128;
         int capacity1 = 101;
-        int amountOfElements = 50;
+        int amountOfElements = 10000;
         int amountOfElements1 = 150;
         //all the linear probing questions
         System.out.println("\nLINEAR PROBING\n");
